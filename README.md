@@ -48,6 +48,9 @@ This version of the framework contains Assets owned by SEGA, everything else is 
 
 - **Current release** — Example implementation using classic Sonic sprites for reference
 - **Asset Library release** — Clean version with no proprietary assets, submitted to the Godot Asset Library
+- **Extensive Documentation** — Documentation for both learning and tinkering purposes.
+- **More Character Examples** — More character examples using official sprites for reference will eventually be added to demonstrate the modular capabilities.
+- **Level Assets** — Different type of assets will be implemented to help testing and level building.
 
 ---
 
