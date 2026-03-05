@@ -38,6 +38,12 @@ Creating a custom character with unique stats and abilities requires no modifica
 
 ---
 
+## Licensing
+
+This version of the framework contains Assets owned by SEGA, everything else is under MIT licensing. If you want to use this framework for commercial use, remove every SEGA owned asset from the framework. A full MIT version of the framework is in the works.
+
+---
+
 ## Roadmap
 
 - **Current release** — Example implementation using classic Sonic sprites for reference
