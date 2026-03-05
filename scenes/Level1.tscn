@@ -1,0 +1,980 @@
+[gd_scene format=4 uid="uid://nwoojb81aoln"]
+
+[ext_resource type="TileSet" uid="uid://bh5iuw67inko5" path="res://spritesheets/emeral_hill.tres" id="1_4dyl1"]
+[ext_resource type="PackedScene" uid="uid://cx7iimudr2qwh" path="res://scenes/MomentumController/character.tscn" id="1_bwv4p"]
+[ext_resource type="Script" uid="uid://ckgq08q7ylqar" path="res://scripts/test_loop.gd" id="2_2meft"]
+[ext_resource type="Texture2D" uid="uid://dw46nkvw7mtg7" path="res://spritesheets/emeral_hill_background1.png" id="2_dw26h"]
+[ext_resource type="Texture2D" uid="uid://drfovjhpfcdrh" path="res://spritesheets/emeral_hill_background2.png" id="2_lrl65"]
+[ext_resource type="PackedScene" uid="uid://c3rm0l7jyn11s" path="res://scenes/basic_platform.tscn" id="2_odhdn"]
+[ext_resource type="Script" uid="uid://cxf857p6iapok" path="res://scripts/area_2d.gd" id="3_0xqs2"]
+[ext_resource type="Texture2D" uid="uid://bb22j88al3wu6" path="res://spritesheets/emeral_hill_background3.png" id="3_76388"]
+[ext_resource type="Script" uid="uid://bf3ajnr1nt1td" path="res://scripts/character_camera.gd" id="4_dw26h"]
+[ext_resource type="Texture2D" uid="uid://xf75q071l10n" path="res://spritesheets/500px-Circle_-_black_simple.svg.png" id="4_ipmer"]
+[ext_resource type="Texture2D" uid="uid://codoyq11qywpk" path="res://spritesheets/emeral_hill_background4.png" id="4_svatc"]
+[ext_resource type="Texture2D" uid="uid://bucg3pp4m063" path="res://spritesheets/emeral_hill_background5.png" id="5_ecr63"]
+[ext_resource type="Texture2D" uid="uid://c1bf5dmwfkxmj" path="res://spritesheets/emeral_hill_background6.png" id="6_kbo48"]
+[ext_resource type="Texture2D" uid="uid://w65b0btov7yy" path="res://spritesheets/emeral_hill_background7.png" id="7_4dyl1"]
+[ext_resource type="AudioStream" uid="uid://q4sx4bkomxms" path="res://sounds/02 - Emerald Hill Zone MP3.mp3" id="13_2meft"]
+[ext_resource type="PackedScene" uid="uid://vreoxbnqv3h7" path="res://scenes/MomentumController/Modules/momentum_audio.tscn" id="16_i2gr7"]
+[ext_resource type="PackedScene" uid="uid://b6hx2wl8dque4" path="res://scenes/MomentumController/Modules/spindash.tscn" id="17_t46sy"]
+[ext_resource type="PackedScene" uid="uid://dj5f5b0wgvos1" path="res://scenes/MomentumController/Modules/dropdash.tscn" id="18_thv4y"]
+[ext_resource type="PackedScene" uid="uid://did75mn8fg3yc" path="res://scenes/MomentumController/Modules/sonic_animation.tscn" id="19_u4kti"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ipmer"]
+size = Vector2(29, 31.75)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_av1gt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xqs2"]
+size = Vector2(244, 331)
+
+[sub_resource type="GDScript" id="GDScript_ipmer"]
+script/source = "extends CollisionShape2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[node name="Node2D" type="Node2D" unique_id=1929657209]
+
+[node name="Scenaries" type="Node2D" parent="." unique_id=2139321034]
+position = Vector2(0, 17)
+scale = Vector2(0.9980889, 0.9985454)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Scenaries" unique_id=1215626865]
+tile_map_data = PackedByteArray("AAD//wAAAAABAAAAAAAAAAAAAAACAAAAAAABAAAAAAADAAAAAAACAAAAAAADAAAAAAADAAAAAAAEAAAAAAAEAAAAAAAFAAAAAAAFAAAAAAAGAAAAAAAGAAAAAAAHAAAAAAAHAAAAAAAIAAAAAAAIAAAAAAAJAAAAAAD+/wAAAAAIAA8AAAD9/wAAAAAGAAcAAAD8/wAAAAADAAAAAAD7/wAAAAAGAAcAAAD/////AAABAA8AAAD+////AAAAABAAAAD+//7/AAAEAA8AAAD///7/AAAJAA0AAAD7/wEAAAAEAAEAAAD8/wEAAAACAA4AAAD9/wEAAAAEAAEAAAD+/wEAAAACABIAAAD//wEAAAACAA4AAAAAAAEAAAAFAAoAAAABAAEAAAACAA4AAAACAAEAAAACAA4AAAADAAEAAAAEAAEAAAAEAAEAAAACAA4AAAAFAAEAAAAFAAoAAAAGAAEAAAACAA4AAAAHAAEAAAAFAAoAAAAIAAEAAAAEAAEAAAAGAP//AAAJAA0AAAAJAAAAAAACAAEAAAAKAAAAAAADAAIAAAALAAAAAAACAAQAAAAKAAEAAAAFAAoAAAAJAAEAAAAFAAoAAAALAAEAAAACAAMAAAAMAAEAAAAIAA8AAAANAAEAAAADAAIAAAAOAAEAAAAAAAQAAAAPAAEAAAABAAQAAAAPAAAAAAAFAAIAAAAOAAAAAAAEAAIAAAAQAAIAAAAEAAsAAAAPAAIAAAAJAA8AAAARAAIAAAAHAA8AAAASAAIAAAAEABIAAAATAAIAAAAFABIAAAATAAMAAAABABMAAAAWAAMAAAAFAAQAAAAWAAIAAAAJAAIAAAAWAAEAAAAAAAMAAAAVAAMAAAAFAA4AAAAUAAMAAAAGAAYAAAAVAAEAAAAAABAAAAAVAAIAAAABAA8AAAAVAAAAAAAEAA8AAAAMAAIAAAAFAAoAAAAOAAIAAAAFAAoAAAANAAIAAAAEAAEAAAAQAAMAAAAEAAEAAAARAAMAAAAEAAEAAAAVAAQAAAAEAAEAAAAUAAQAAAAFAAoAAAAWAAQAAAAFAAoAAAATAAQAAAAFAAoAAAAPAAMAAAAFAAoAAAAOAAMAAAAFAAoAAAASAAMAAAAJAA8AAAAMAAAAAAABAA8AAAAMAP//AAAJAA0AAAALAAIAAAAEAAEAAAAKAAIAAAAFAAoAAAASAAQAAAAEAAEAAAD6/wAAAAADAA0AAAD6//7/AAADAA0AAAD6////AAADAA0AAAD6//3/AAAEAAgAAAD5//3/AAABABMAAAD5//7/AAAEABQAAAD5////AAAGABQAAAD5/wAAAAABAA4AAAD6/wEAAAADAA0AAAD5/wEAAAABAA4AAAA=")
+tile_set = ExtResource("1_4dyl1")
+
+[node name="Collision" type="Node2D" parent="." unique_id=1161852356]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Collision" unique_id=1714991234]
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Collision/StaticBody2D" unique_id=1120950327]
+build_mode = 1
+polygon = PackedVector2Array(-639, 20, -239, 21, -136, 53, -78, 56, -17, 54, 92, 27, 117, 22, 445, 19, 445, 50, 573, 50, 573, 83, 645, 84, 741, 108, 799, 117, 866, 117, 916, 107, 960, 98, 982, 89, 1030, 81, 1055, 75, 1076, 66, 1093, 54, 1104, 39, 1110, 28, 1113, 22, 1149, 22, 1148, 147, -767, 145, -765, -239, -639, -238)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision/StaticBody2D" unique_id=1726756370]
+position = Vector2(1149, 22)
+build_mode = 1
+polygon = PackedVector2Array(728, 240, -1, 125, 0, 0, 259, 63, 344, 107, 381, 129, 411, 132, 448, 145, 520, 162, 619, 184, 683, 186, 729, 188)
+
+[node name="Loop" type="Node2D" parent="Collision" unique_id=1960845814]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Collision/Loop" unique_id=1219607255]
+
+[node name="Right" type="CollisionPolygon2D" parent="Collision/Loop/StaticBody2D" unique_id=1527503210]
+polygon = PackedVector2Array(1878, 210, 1902, 211, 1915, 211, 1941, 208, 1964, 200, 1978, 190, 1995, 173, 2005, 152, 2013, 122, 2009, 100, 2003, 81, 1988, 61, 2044, 61, 2044, 177, 2028, 177, 2028, 193, 2012, 193, 2012, 208, 1996, 209, 1996, 224, 1980, 224, 1878, 224)
+
+[node name="Top" type="CollisionPolygon2D" parent="Collision/Loop/StaticBody2D" unique_id=931817283]
+polygon = PackedVector2Array(1988, 61, 1976, 51, 1959, 40, 1935, 34, 1903, 34, 1876, 40, 1858, 49, 1846, 62, 1789, 63, 1789, 33, 1809, 33, 1839, 22, 1996, 22, 2027, 33, 2044, 33, 2044, 61)
+
+[node name="Left" type="CollisionPolygon2D" parent="Collision/Loop/StaticBody2D" unique_id=366803284]
+polygon = PackedVector2Array(1846, 62, 1832, 82, 1823, 103, 1820, 129, 1824, 148, 1835, 171, 1855, 194, 1874, 209, 1905, 219, 1968, 242, 2006, 257, 2032, 271, 1791, 271, 1789, 63)
+disabled = true
+
+[node name="Area2D2" type="Area2D" parent="Collision/Loop" unique_id=676759805]
+position = Vector2(-849, -374)
+collision_mask = 16
+script = ExtResource("2_2meft")
+forward = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision/Loop/Area2D2" unique_id=1874873662]
+position = Vector2(2812, 427)
+shape = SubResource("RectangleShape2D_ipmer")
+
+[node name="Area2D" type="Area2D" parent="Collision/Loop" unique_id=1522070240]
+position = Vector2(-1358, -371)
+collision_mask = 16
+script = ExtResource("2_2meft")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision/Loop/Area2D" unique_id=1724015253]
+position = Vector2(3224, 423)
+shape = SubResource("RectangleShape2D_ipmer")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Collision" unique_id=800089604]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision/StaticBody2D2" unique_id=2120782226]
+position = Vector2(1149, 22)
+build_mode = 1
+polygon = PackedVector2Array(884, 250, 883, 530, 1789, 550, 1789, 188, 1758, 188, 1758, 384, 1755, 412, 1735, 455, 1691, 479, 1631, 477, 1549, 447, 1527, 443, 1496, 442, 1466, 433, 1441, 413, 1426, 398, 1404, 393, 1372, 390, 1027, 301, 999, 299)
+
+[node name="Node7" type="Node2D" parent="Collision" unique_id=2047692501]
+position = Vector2(7207, 8461)
+rotation = -1.5707964
+
+[node name="BasicPlatform38" parent="Collision/Node7" unique_id=400968693 instance=ExtResource("2_odhdn")]
+position = Vector2(8036, -1637.9998)
+rotation = -0.87266463
+
+[node name="BasicPlatform39" parent="Collision/Node7" unique_id=1319279956 instance=ExtResource("2_odhdn")]
+position = Vector2(8114, -1755.9994)
+rotation = -1.0908308
+
+[node name="BasicPlatform40" parent="Collision/Node7" unique_id=274794352 instance=ExtResource("2_odhdn")]
+position = Vector2(8165, -1887.9998)
+rotation = -1.3089969
+
+[node name="BasicPlatform41" parent="Collision/Node7" unique_id=1600142784 instance=ExtResource("2_odhdn")]
+position = Vector2(8186, -2026.9995)
+rotation = -1.5271631
+
+[node name="BasicPlatform42" parent="Collision/Node7" unique_id=1161065295 instance=ExtResource("2_odhdn")]
+position = Vector2(7681, -1421.9995)
+rotation = -0.21816616
+
+[node name="BasicPlatform43" parent="Collision/Node7" unique_id=961854960 instance=ExtResource("2_odhdn")]
+position = Vector2(7814.001, -1466.9998)
+rotation = -0.43633232
+
+[node name="BasicPlatform44" parent="Collision/Node7" unique_id=1106614959 instance=ExtResource("2_odhdn")]
+position = Vector2(7934, -1539.9995)
+rotation = -0.65449846
+
+[node name="BasicPlatform49" parent="Collision/Node7" unique_id=856550342 instance=ExtResource("2_odhdn")]
+position = Vector2(8188, -2285.9995)
+rotation = -1.5707964
+
+[node name="BasicPlatform50" parent="Collision/Node7" unique_id=1139436943 instance=ExtResource("2_odhdn")]
+position = Vector2(8188, -2413.9995)
+rotation = -1.5707964
+
+[node name="BasicPlatform51" parent="Collision/Node7" unique_id=1486220844 instance=ExtResource("2_odhdn")]
+position = Vector2(8188, -2540.9995)
+rotation = -1.5707964
+
+[node name="BasicPlatform52" parent="Collision/Node7" unique_id=2085488577 instance=ExtResource("2_odhdn")]
+position = Vector2(8188, -2667.9995)
+rotation = -1.5707964
+
+[node name="BasicPlatform53" parent="Collision/Node7" unique_id=1759642993 instance=ExtResource("2_odhdn")]
+position = Vector2(8188, -2795.9995)
+rotation = -1.5707964
+
+[node name="BasicPlatform54" parent="Collision/Node7" unique_id=1514878123 instance=ExtResource("2_odhdn")]
+position = Vector2(8188, -2923.9995)
+rotation = -1.5707964
+
+[node name="BasicPlatform55" parent="Collision/Node7" unique_id=222584052 instance=ExtResource("2_odhdn")]
+position = Vector2(8188, -3050.9995)
+rotation = -1.5707964
+
+[node name="BasicPlatform56" parent="Collision/Node7" unique_id=22593867 instance=ExtResource("2_odhdn")]
+position = Vector2(8188, -3177.9995)
+rotation = -1.5707964
+
+[node name="BasicPlatform57" parent="Collision/Node7" unique_id=1368159189 instance=ExtResource("2_odhdn")]
+position = Vector2(8188, -3313.9995)
+rotation = -1.5707964
+
+[node name="BasicPlatform58" parent="Collision/Node7" unique_id=958257953 instance=ExtResource("2_odhdn")]
+position = Vector2(8188, -3441.9995)
+rotation = -1.5707964
+
+[node name="BasicPlatform59" parent="Collision/Node7" unique_id=1245905383 instance=ExtResource("2_odhdn")]
+position = Vector2(8188, -3568.9995)
+rotation = -1.5707964
+
+[node name="BasicPlatform60" parent="Collision/Node7" unique_id=1282621654 instance=ExtResource("2_odhdn")]
+position = Vector2(8188, -3695.9995)
+rotation = -1.5707964
+
+[node name="BasicPlatform61" parent="Collision/Node7" unique_id=2093745920 instance=ExtResource("2_odhdn")]
+position = Vector2(8188, -3823.9995)
+rotation = -1.5707964
+
+[node name="BasicPlatform62" parent="Collision/Node7" unique_id=1418701228 instance=ExtResource("2_odhdn")]
+position = Vector2(8188, -3951.9995)
+rotation = -1.5707964
+
+[node name="BasicPlatform63" parent="Collision/Node7" unique_id=235763841 instance=ExtResource("2_odhdn")]
+position = Vector2(8188, -4078.9995)
+rotation = -1.5707964
+
+[node name="BasicPlatform64" parent="Collision/Node7" unique_id=1268091275 instance=ExtResource("2_odhdn")]
+position = Vector2(8188, -4205.9995)
+rotation = -1.5707964
+
+[node name="BasicPlatform106" parent="Collision/Node7" unique_id=757925653 instance=ExtResource("2_odhdn")]
+position = Vector2(8188, -2158.9995)
+rotation = -1.5707964
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision/Node7/BasicPlatform106" unique_id=1235249155]
+build_mode = 1
+polygon = PackedVector2Array(-63, 63.999985, -72, 62.999985, -197, 57.99997, -225, 53.99997, -350, 20.999954, -376, 11.999939, -489, -47.00006, -511, -61.00006, -610, -145.00006, -631, -166.00006, -708, -266.00006, -722, -289.00006, -776, -405.00006, -784, -430.00006, -813, -555.00006, -816, -574.00006, -816, -704.00006, -816.9995, -2631, -810.9995, -2757, -805.9995, -2782, -772.9995, -2910, -761.9995, -2934, -698.9995, -3057, -587.9995, -3187, -463.9995, -3281, -319.9995, -3343, -192.99951, -3371, -42.99951, -3371)
+
+[node name="Node6" type="Node2D" parent="Collision" unique_id=491219143]
+position = Vector2(-2512, 3079)
+
+[node name="BasicPlatform34" parent="Collision/Node6" unique_id=1156096908 instance=ExtResource("2_odhdn")]
+position = Vector2(8313, -245)
+rotation = -1.5707964
+
+[node name="BasicPlatform38" parent="Collision/Node6" unique_id=340921246 instance=ExtResource("2_odhdn")]
+position = Vector2(8160, 271.00015)
+rotation = -0.87266463
+
+[node name="BasicPlatform39" parent="Collision/Node6" unique_id=820671012 instance=ExtResource("2_odhdn")]
+position = Vector2(8238, 153.00015)
+rotation = -1.0908308
+
+[node name="BasicPlatform40" parent="Collision/Node6" unique_id=320182610 instance=ExtResource("2_odhdn")]
+position = Vector2(8289, 21.000061)
+rotation = -1.3089969
+
+[node name="BasicPlatform41" parent="Collision/Node6" unique_id=407399274 instance=ExtResource("2_odhdn")]
+position = Vector2(8310, -117.99991)
+rotation = -1.5271631
+
+[node name="BasicPlatform42" parent="Collision/Node6" unique_id=927980872 instance=ExtResource("2_odhdn")]
+position = Vector2(7805, 487.00006)
+rotation = -0.21816616
+
+[node name="BasicPlatform43" parent="Collision/Node6" unique_id=330283656 instance=ExtResource("2_odhdn")]
+position = Vector2(7938.001, 442.00003)
+rotation = -0.43633232
+
+[node name="BasicPlatform44" parent="Collision/Node6" unique_id=848927890 instance=ExtResource("2_odhdn")]
+position = Vector2(8058, 369.0001)
+rotation = -0.65449846
+
+[node name="BasicPlatform35" parent="Collision/Node6" unique_id=1585958935 instance=ExtResource("2_odhdn")]
+position = Vector2(8313, -373)
+rotation = -1.5707964
+
+[node name="BasicPlatform36" parent="Collision/Node6" unique_id=1787946397 instance=ExtResource("2_odhdn")]
+position = Vector2(8313, -500)
+rotation = -1.5707964
+
+[node name="BasicPlatform37" parent="Collision/Node6" unique_id=284007917 instance=ExtResource("2_odhdn")]
+position = Vector2(8313, -627)
+rotation = -1.5707964
+
+[node name="BasicPlatform45" parent="Collision/Node6" unique_id=1528309119 instance=ExtResource("2_odhdn")]
+position = Vector2(8313, -755)
+rotation = -1.5707964
+
+[node name="BasicPlatform46" parent="Collision/Node6" unique_id=1743229441 instance=ExtResource("2_odhdn")]
+position = Vector2(8313, -883)
+rotation = -1.5707964
+
+[node name="BasicPlatform47" parent="Collision/Node6" unique_id=827236164 instance=ExtResource("2_odhdn")]
+position = Vector2(8313, -1010)
+rotation = -1.5707964
+
+[node name="BasicPlatform48" parent="Collision/Node6" unique_id=1495357807 instance=ExtResource("2_odhdn")]
+position = Vector2(8313, -1137)
+rotation = -1.5707964
+
+[node name="BasicPlatform60" parent="Collision/Node6" unique_id=16006123 instance=ExtResource("2_odhdn")]
+position = Vector2(8313, -1657)
+rotation = -1.5707964
+
+[node name="BasicPlatform61" parent="Collision/Node6" unique_id=1339605090 instance=ExtResource("2_odhdn")]
+position = Vector2(8313, -1785)
+rotation = -1.5707964
+
+[node name="BasicPlatform62" parent="Collision/Node6" unique_id=1467649903 instance=ExtResource("2_odhdn")]
+position = Vector2(8313, -1913)
+rotation = -1.5707964
+
+[node name="BasicPlatform63" parent="Collision/Node6" unique_id=718878770 instance=ExtResource("2_odhdn")]
+position = Vector2(8313, -2040)
+rotation = -1.5707964
+
+[node name="BasicPlatform64" parent="Collision/Node6" unique_id=1257187595 instance=ExtResource("2_odhdn")]
+position = Vector2(8313, -2167)
+rotation = -1.5707964
+
+[node name="BasicPlatform99" parent="Collision/Node6" unique_id=673234069 instance=ExtResource("2_odhdn")]
+position = Vector2(8313, -1273)
+rotation = -1.5707964
+
+[node name="BasicPlatform100" parent="Collision/Node6" unique_id=155166918 instance=ExtResource("2_odhdn")]
+position = Vector2(8313, -1401)
+rotation = -1.5707964
+
+[node name="BasicPlatform101" parent="Collision/Node6" unique_id=1028598908 instance=ExtResource("2_odhdn")]
+position = Vector2(8313, -1528)
+rotation = -1.5707964
+
+[node name="Node2D" type="Node2D" parent="Collision" unique_id=2096142237]
+position = Vector2(6159, -871)
+rotation = 1.5707964
+
+[node name="BasicPlatform49" parent="Collision/Node2D" unique_id=1373995745 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 2924)
+rotation = -1.5707964
+
+[node name="BasicPlatform50" parent="Collision/Node2D" unique_id=625416702 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 2796)
+rotation = -1.5707964
+
+[node name="BasicPlatform51" parent="Collision/Node2D" unique_id=1095915184 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 2669)
+rotation = -1.5707964
+
+[node name="BasicPlatform52" parent="Collision/Node2D" unique_id=1184700670 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 2542)
+rotation = -1.5707964
+
+[node name="BasicPlatform53" parent="Collision/Node2D" unique_id=1173350228 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 2414)
+rotation = -1.5707964
+
+[node name="BasicPlatform54" parent="Collision/Node2D" unique_id=486098635 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 2286)
+rotation = -1.5707964
+
+[node name="BasicPlatform55" parent="Collision/Node2D" unique_id=318938484 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 2159)
+rotation = -1.5707964
+
+[node name="BasicPlatform56" parent="Collision/Node2D" unique_id=996669047 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 2032)
+rotation = -1.5707964
+
+[node name="BasicPlatform57" parent="Collision/Node2D" unique_id=862509820 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 1896)
+rotation = -1.5707964
+
+[node name="BasicPlatform58" parent="Collision/Node2D" unique_id=1669023060 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 1768)
+rotation = -1.5707964
+
+[node name="BasicPlatform59" parent="Collision/Node2D" unique_id=901405355 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 1641)
+rotation = -1.5707964
+
+[node name="BasicPlatform60" parent="Collision/Node2D" unique_id=2041172240 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 1514)
+rotation = -1.5707964
+
+[node name="BasicPlatform61" parent="Collision/Node2D" unique_id=541586861 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 1386)
+rotation = -1.5707964
+
+[node name="BasicPlatform62" parent="Collision/Node2D" unique_id=115076973 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 1258)
+rotation = -1.5707964
+
+[node name="BasicPlatform63" parent="Collision/Node2D" unique_id=1392422555 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 1131)
+rotation = -1.5707964
+
+[node name="BasicPlatform64" parent="Collision/Node2D" unique_id=817794502 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 1004)
+rotation = -1.5707964
+
+[node name="Node2D2" type="Node2D" parent="Collision" unique_id=1921462715]
+position = Vector2(3092, 4083)
+rotation = -3.1415927
+
+[node name="BasicPlatform38" parent="Collision/Node2D2" unique_id=1182927315 instance=ExtResource("2_odhdn")]
+position = Vector2(355, 271.00015)
+rotation = -0.87266463
+
+[node name="BasicPlatform39" parent="Collision/Node2D2" unique_id=1054377751 instance=ExtResource("2_odhdn")]
+position = Vector2(433, 153.00015)
+rotation = -1.0908308
+
+[node name="BasicPlatform40" parent="Collision/Node2D2" unique_id=70120982 instance=ExtResource("2_odhdn")]
+position = Vector2(484, 21.000061)
+rotation = -1.3089969
+
+[node name="BasicPlatform41" parent="Collision/Node2D2" unique_id=340306328 instance=ExtResource("2_odhdn")]
+position = Vector2(505, -117.99991)
+rotation = -1.5271631
+
+[node name="BasicPlatform42" parent="Collision/Node2D2" unique_id=1211300619 instance=ExtResource("2_odhdn")]
+position = Vector2(0, 487.00006)
+rotation = -0.21816616
+
+[node name="BasicPlatform43" parent="Collision/Node2D2" unique_id=985241516 instance=ExtResource("2_odhdn")]
+position = Vector2(133.00012, 442.00003)
+rotation = -0.43633232
+
+[node name="BasicPlatform44" parent="Collision/Node2D2" unique_id=956119023 instance=ExtResource("2_odhdn")]
+position = Vector2(253, 369.0001)
+rotation = -0.65449846
+
+[node name="Node2D3" type="Node2D" parent="Collision" unique_id=1381460007]
+position = Vector2(3085, 4344)
+rotation = -4.712389
+
+[node name="BasicPlatform38" parent="Collision/Node2D3" unique_id=112666098 instance=ExtResource("2_odhdn")]
+position = Vector2(355, 271.00015)
+rotation = -0.87266463
+
+[node name="BasicPlatform39" parent="Collision/Node2D3" unique_id=566455899 instance=ExtResource("2_odhdn")]
+position = Vector2(433, 153.00015)
+rotation = -1.0908308
+
+[node name="BasicPlatform40" parent="Collision/Node2D3" unique_id=950089908 instance=ExtResource("2_odhdn")]
+position = Vector2(484, 21.000061)
+rotation = -1.3089969
+
+[node name="BasicPlatform41" parent="Collision/Node2D3" unique_id=1675864438 instance=ExtResource("2_odhdn")]
+position = Vector2(505, -117.99991)
+rotation = -1.5271631
+
+[node name="BasicPlatform42" parent="Collision/Node2D3" unique_id=1773795276 instance=ExtResource("2_odhdn")]
+position = Vector2(0, 487.00006)
+rotation = -0.21816616
+
+[node name="BasicPlatform43" parent="Collision/Node2D3" unique_id=1085304224 instance=ExtResource("2_odhdn")]
+position = Vector2(133.00012, 442.00003)
+rotation = -0.43633232
+
+[node name="BasicPlatform44" parent="Collision/Node2D3" unique_id=18851793 instance=ExtResource("2_odhdn")]
+position = Vector2(253, 369.0001)
+rotation = -0.65449846
+
+[node name="Node2D4" type="Node2D" parent="Collision" unique_id=1431728041]
+position = Vector2(6261, 400)
+rotation = 1.5707964
+
+[node name="BasicPlatform49" parent="Collision/Node2D4" unique_id=1315977387 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 2924)
+rotation = -1.5707964
+
+[node name="BasicPlatform50" parent="Collision/Node2D4" unique_id=407541328 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 2796)
+rotation = -1.5707964
+
+[node name="BasicPlatform51" parent="Collision/Node2D4" unique_id=1560615935 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 2669)
+rotation = -1.5707964
+
+[node name="BasicPlatform52" parent="Collision/Node2D4" unique_id=1083949196 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 2542)
+rotation = -1.5707964
+
+[node name="BasicPlatform53" parent="Collision/Node2D4" unique_id=1981849530 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 2414)
+rotation = -1.5707964
+
+[node name="BasicPlatform54" parent="Collision/Node2D4" unique_id=1489631591 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 2286)
+rotation = -1.5707964
+
+[node name="BasicPlatform55" parent="Collision/Node2D4" unique_id=1130511806 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 2159)
+rotation = -1.5707964
+
+[node name="BasicPlatform56" parent="Collision/Node2D4" unique_id=207040163 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 2032)
+rotation = -1.5707964
+
+[node name="BasicPlatform57" parent="Collision/Node2D4" unique_id=2042080705 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 1896)
+rotation = -1.5707964
+
+[node name="BasicPlatform58" parent="Collision/Node2D4" unique_id=2119791432 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 1768)
+rotation = -1.5707964
+
+[node name="BasicPlatform59" parent="Collision/Node2D4" unique_id=556626005 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 1641)
+rotation = -1.5707964
+
+[node name="BasicPlatform60" parent="Collision/Node2D4" unique_id=1818585614 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 1514)
+rotation = -1.5707964
+
+[node name="BasicPlatform61" parent="Collision/Node2D4" unique_id=725491341 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 1386)
+rotation = -1.5707964
+
+[node name="BasicPlatform62" parent="Collision/Node2D4" unique_id=1165756662 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 1258)
+rotation = -1.5707964
+
+[node name="BasicPlatform63" parent="Collision/Node2D4" unique_id=607000403 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 1131)
+rotation = -1.5707964
+
+[node name="BasicPlatform64" parent="Collision/Node2D4" unique_id=1780100405 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 1004)
+rotation = -1.5707964
+
+[node name="Node2D6" type="Node2D" parent="Collision" unique_id=250989695]
+position = Vector2(8263, 402)
+rotation = 1.5707964
+
+[node name="BasicPlatform49" parent="Collision/Node2D6" unique_id=1376396499 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 2924)
+rotation = -1.5707964
+
+[node name="BasicPlatform50" parent="Collision/Node2D6" unique_id=259353807 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 2796)
+rotation = -1.5707964
+
+[node name="BasicPlatform51" parent="Collision/Node2D6" unique_id=1031977449 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 2669)
+rotation = -1.5707964
+
+[node name="BasicPlatform52" parent="Collision/Node2D6" unique_id=1218739346 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 2542)
+rotation = -1.5707964
+
+[node name="BasicPlatform53" parent="Collision/Node2D6" unique_id=1556278430 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 2414)
+rotation = -1.5707964
+
+[node name="BasicPlatform54" parent="Collision/Node2D6" unique_id=1649802210 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 2286)
+rotation = -1.5707964
+
+[node name="BasicPlatform55" parent="Collision/Node2D6" unique_id=1680494593 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 2159)
+rotation = -1.5707964
+
+[node name="BasicPlatform56" parent="Collision/Node2D6" unique_id=901563752 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 2032)
+rotation = -1.5707964
+
+[node name="BasicPlatform57" parent="Collision/Node2D6" unique_id=1233617347 instance=ExtResource("2_odhdn")]
+position = Vector2(4451, 1904)
+rotation = -1.5707964
+
+[node name="BasicPlatform58" parent="Collision/Node2D6" unique_id=136043525 instance=ExtResource("2_odhdn")]
+position = Vector2(4451, 1776)
+rotation = -1.5707964
+
+[node name="BasicPlatform59" parent="Collision/Node2D6" unique_id=1261295408 instance=ExtResource("2_odhdn")]
+position = Vector2(4451, 1649)
+rotation = -1.5707964
+
+[node name="BasicPlatform60" parent="Collision/Node2D6" unique_id=1487009763 instance=ExtResource("2_odhdn")]
+position = Vector2(4451, 1522)
+rotation = -1.5707964
+
+[node name="BasicPlatform61" parent="Collision/Node2D6" unique_id=1515896373 instance=ExtResource("2_odhdn")]
+position = Vector2(4451, 1394)
+rotation = -1.5707964
+
+[node name="BasicPlatform62" parent="Collision/Node2D6" unique_id=702301023 instance=ExtResource("2_odhdn")]
+position = Vector2(4451, 1266)
+rotation = -1.5707964
+
+[node name="BasicPlatform63" parent="Collision/Node2D6" unique_id=1204959916 instance=ExtResource("2_odhdn")]
+position = Vector2(4451, 1139)
+rotation = -1.5707964
+
+[node name="BasicPlatform64" parent="Collision/Node2D6" unique_id=1579369656 instance=ExtResource("2_odhdn")]
+position = Vector2(4451, 1012)
+rotation = -1.5707964
+
+[node name="Node2D7" type="Node2D" parent="Collision" unique_id=679753926]
+position = Vector2(10303, 401)
+rotation = 1.5707964
+
+[node name="BasicPlatform49" parent="Collision/Node2D7" unique_id=1337303742 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 2924)
+rotation = -1.5707964
+
+[node name="BasicPlatform50" parent="Collision/Node2D7" unique_id=224599898 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 2796)
+rotation = -1.5707964
+
+[node name="BasicPlatform51" parent="Collision/Node2D7" unique_id=1320788622 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 2669)
+rotation = -1.5707964
+
+[node name="BasicPlatform52" parent="Collision/Node2D7" unique_id=697388589 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 2542)
+rotation = -1.5707964
+
+[node name="BasicPlatform53" parent="Collision/Node2D7" unique_id=2107886304 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 2414)
+rotation = -1.5707964
+
+[node name="BasicPlatform54" parent="Collision/Node2D7" unique_id=175571325 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 2286)
+rotation = -1.5707964
+
+[node name="BasicPlatform55" parent="Collision/Node2D7" unique_id=2067389931 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 2159)
+rotation = -1.5707964
+
+[node name="BasicPlatform56" parent="Collision/Node2D7" unique_id=897979967 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 2032)
+rotation = -1.5707964
+
+[node name="BasicPlatform57" parent="Collision/Node2D7" unique_id=17601011 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 1901)
+rotation = -1.5707964
+
+[node name="BasicPlatform58" parent="Collision/Node2D7" unique_id=695549015 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 1773)
+rotation = -1.5707964
+
+[node name="BasicPlatform59" parent="Collision/Node2D7" unique_id=530479575 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 1646)
+rotation = -1.5707964
+
+[node name="BasicPlatform60" parent="Collision/Node2D7" unique_id=537496656 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 1519)
+rotation = -1.5707964
+
+[node name="BasicPlatform61" parent="Collision/Node2D7" unique_id=397683614 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 1391)
+rotation = -1.5707964
+
+[node name="BasicPlatform62" parent="Collision/Node2D7" unique_id=896190408 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 1263)
+rotation = -1.5707964
+
+[node name="BasicPlatform63" parent="Collision/Node2D7" unique_id=175972138 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 1136)
+rotation = -1.5707964
+
+[node name="BasicPlatform64" parent="Collision/Node2D7" unique_id=742725912 instance=ExtResource("2_odhdn")]
+position = Vector2(4452, 1009)
+rotation = -1.5707964
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Collision/Node2D7" unique_id=834488334]
+position = Vector2(5096, -635.00024)
+scale = Vector2(5, 5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision/Node2D7/StaticBody2D" unique_id=1350568893]
+position = Vector2(-0.5, -0.5)
+scale = Vector2(19.108627, 20.552258)
+shape = SubResource("CircleShape2D_av1gt")
+
+[node name="Sprite2D" type="Sprite2D" parent="Collision/Node2D7/StaticBody2D" unique_id=697277543]
+scale = Vector2(0.96011674, 0.96011674)
+texture = ExtResource("4_ipmer")
+
+[node name="Node5" type="Node2D" parent="Collision" unique_id=713160438]
+visible = false
+position = Vector2(10013, 4906)
+rotation = -2.8395364
+
+[node name="BasicPlatform81" parent="Collision/Node5" unique_id=1620497956 instance=ExtResource("2_odhdn")]
+position = Vector2(2689.1743, -775.0765)
+rotation = 3.0106928
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="BasicPlatform82" parent="Collision/Node5" unique_id=1616453107 instance=ExtResource("2_odhdn")]
+position = Vector2(2829.6646, -778.0026)
+rotation = -3.0543263
+
+[node name="BasicPlatform83" parent="Collision/Node5" unique_id=38735285 instance=ExtResource("2_odhdn")]
+position = Vector2(2967.0276, -750.6264)
+rotation = -2.83616
+
+[node name="BasicPlatform84" parent="Collision/Node5" unique_id=647520207 instance=ExtResource("2_odhdn")]
+position = Vector2(3095.597, -694.32477)
+rotation = -2.6179938
+
+[node name="BasicPlatform65" parent="Collision/Node5" unique_id=1148696085 instance=ExtResource("2_odhdn")]
+position = Vector2(8298.11, -2277.6726)
+rotation = 2.8395364
+scale = Vector2(1, 2.7599974)
+
+[node name="BasicPlatform88" parent="Collision/Node5" unique_id=1645315799 instance=ExtResource("2_odhdn")]
+position = Vector2(2709.113, -791.7635)
+rotation = 2.8395364
+
+[node name="Node3" type="Node2D" parent="Collision" unique_id=231407009]
+position = Vector2(4543, 4348)
+
+[node name="BasicPlatform39" parent="Collision/Node3" unique_id=103440476 instance=ExtResource("2_odhdn")]
+position = Vector2(3348.0002, 159.00024)
+rotation = -1.0908308
+
+[node name="BasicPlatform38" parent="Collision/Node3" unique_id=834465934 instance=ExtResource("2_odhdn")]
+position = Vector2(3270, 277.00015)
+rotation = -0.87266463
+
+[node name="BasicPlatform42" parent="Collision/Node3" unique_id=54194605 instance=ExtResource("2_odhdn")]
+position = Vector2(2915, 493.00012)
+rotation = -0.2181661
+
+[node name="BasicPlatform43" parent="Collision/Node3" unique_id=570910719 instance=ExtResource("2_odhdn")]
+position = Vector2(3048.0002, 448.00012)
+rotation = -0.43633235
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="BasicPlatform44" parent="Collision/Node3" unique_id=666329304 instance=ExtResource("2_odhdn")]
+position = Vector2(3167.9998, 375.0002)
+rotation = -0.6544985
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="Node2D5" type="Node2D" parent="Collision" unique_id=844121372]
+position = Vector2(4543, 4348)
+
+[node name="BasicPlatform34" parent="Collision/Node2D5" unique_id=323587815 instance=ExtResource("2_odhdn")]
+position = Vector2(2142.0002, -219)
+rotation = 1.6983197
+scale = Vector2(1.0036138, 0.9994418)
+
+[node name="BasicPlatform35" parent="Collision/Node2D5" unique_id=919785776 instance=ExtResource("2_odhdn")]
+position = Vector2(2140.0002, -78.00012)
+rotation = 1.4801536
+
+[node name="BasicPlatform36" parent="Collision/Node2D5" unique_id=2102133209 instance=ExtResource("2_odhdn")]
+position = Vector2(2168, 58.999847)
+rotation = 1.2619873
+
+[node name="BasicPlatform37" parent="Collision/Node2D5" unique_id=680002604 instance=ExtResource("2_odhdn")]
+position = Vector2(2225.0002, 187.00012)
+rotation = 1.0438212
+
+[node name="BasicPlatform38" parent="Collision/Node2D5" unique_id=1124575891 instance=ExtResource("2_odhdn")]
+position = Vector2(2432.0002, -680)
+rotation = 2.5709844
+
+[node name="BasicPlatform39" parent="Collision/Node2D5" unique_id=1704056722 instance=ExtResource("2_odhdn")]
+position = Vector2(2323.0005, -591.9999)
+rotation = 2.352818
+
+[node name="BasicPlatform40" parent="Collision/Node2D5" unique_id=1868381783 instance=ExtResource("2_odhdn")]
+position = Vector2(2236, -481.99988)
+rotation = 2.134652
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="BasicPlatform41" parent="Collision/Node2D5" unique_id=574900733 instance=ExtResource("2_odhdn")]
+position = Vector2(2175.0002, -355.99988)
+rotation = 1.9164858
+
+[node name="BasicPlatform43" parent="Collision/Node2D5" unique_id=224779579 instance=ExtResource("2_odhdn")]
+position = Vector2(2693.2656, -776.44885)
+rotation = 3.0073166
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="BasicPlatform44" parent="Collision/Node2D5" unique_id=903423563 instance=ExtResource("2_odhdn")]
+position = Vector2(2556.9824, -742.4519)
+rotation = 2.7891505
+
+[node name="BasicPlatform42" parent="Collision/Node2D5" unique_id=52719054 instance=ExtResource("2_odhdn")]
+position = Vector2(3410, -255)
+rotation = -1.7453293
+scale = Vector2(1.0036138, 0.9994418)
+
+[node name="BasicPlatform45" parent="Collision/Node2D5" unique_id=471089445 instance=ExtResource("2_odhdn")]
+position = Vector2(3371.0002, -387.99988)
+rotation = -1.9634954
+
+[node name="BasicPlatform46" parent="Collision/Node2D5" unique_id=1190127389 instance=ExtResource("2_odhdn")]
+position = Vector2(3303, -509)
+rotation = -2.1816616
+
+[node name="BasicPlatform47" parent="Collision/Node2D5" unique_id=1144632024 instance=ExtResource("2_odhdn")]
+position = Vector2(3212, -618)
+rotation = -2.3998277
+
+[node name="BasicPlatform48" parent="Collision/Node2D5" unique_id=33422568 instance=ExtResource("2_odhdn")]
+position = Vector2(3420.0002, -111.999695)
+rotation = -1.5271631
+
+[node name="BasicPlatform49" parent="Collision/Node2D5" unique_id=1747831086 instance=ExtResource("2_odhdn")]
+position = Vector2(3398.9998, 27.000244)
+rotation = -1.3089969
+
+[node name="BasicPlatform85" parent="Collision/Node2D5" unique_id=1686280308 instance=ExtResource("2_odhdn")]
+position = Vector2(2833.0002, -780.9999)
+rotation = -3.0778728
+
+[node name="BasicPlatform86" parent="Collision/Node2D5" unique_id=1250846024 instance=ExtResource("2_odhdn")]
+position = Vector2(2973.0002, -754.9999)
+rotation = -2.83616
+
+[node name="BasicPlatform87" parent="Collision/Node2D5" unique_id=1226712088 instance=ExtResource("2_odhdn")]
+position = Vector2(3099.0002, -699.99976)
+rotation = -2.6179938
+
+[node name="Area2D2" type="Area2D" parent="Collision" unique_id=926664159 node_paths=PackedStringArray("node_5", "node_2")]
+position = Vector2(4462, 3742)
+collision_mask = 16
+script = ExtResource("3_0xqs2")
+node_5 = NodePath("../Node5")
+node_2 = NodePath("../Node3")
+back = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision/Area2D2" unique_id=583379066]
+position = Vector2(3101, 7)
+shape = SubResource("RectangleShape2D_0xqs2")
+script = SubResource("GDScript_ipmer")
+
+[node name="Area2D" type="Area2D" parent="Collision" unique_id=53376107 node_paths=PackedStringArray("node_5", "node_2")]
+position = Vector2(3953, 3745)
+collision_mask = 16
+script = ExtResource("3_0xqs2")
+node_5 = NodePath("../Node5")
+node_2 = NodePath("../Node3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision/Area2D" unique_id=282647026]
+position = Vector2(3101, 7)
+shape = SubResource("RectangleShape2D_0xqs2")
+script = SubResource("GDScript_ipmer")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Collision" unique_id=985460184]
+position = Vector2(9632, 4902.0005)
+scale = Vector2(0.4452257, 0.4452257)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision/StaticBody2D3" unique_id=280215028]
+position = Vector2(-0.5, -0.5)
+scale = Vector2(19.108627, 20.552258)
+shape = SubResource("CircleShape2D_av1gt")
+
+[node name="Sprite2D" type="Sprite2D" parent="Collision/StaticBody2D3" unique_id=1974565522]
+scale = Vector2(0.96011674, 0.96011674)
+texture = ExtResource("4_ipmer")
+
+[node name="Parallax" type="Node2D" parent="." unique_id=152972837]
+
+[node name="Background1" type="Parallax2D" parent="Parallax" unique_id=1934345738]
+z_index = -12
+scale = Vector2(0.9980889, 1)
+scroll_scale = Vector2(0.001, 0)
+repeat_size = Vector2(512, 0)
+repeat_times = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Background1" unique_id=860079558]
+position = Vector2(975, 459)
+texture = ExtResource("2_dw26h")
+
+[node name="Background2" type="Parallax2D" parent="Parallax" unique_id=1204583941]
+z_index = -12
+scale = Vector2(0.9980889, 1)
+scroll_scale = Vector2(0.01, 0)
+repeat_size = Vector2(512, 0)
+repeat_times = 10
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Background2" unique_id=1472780469]
+position = Vector2(975, 515)
+texture = ExtResource("2_lrl65")
+
+[node name="Background3" type="Parallax2D" parent="Parallax" unique_id=184359938]
+z_index = -12
+scale = Vector2(0.9980889, 1)
+scroll_scale = Vector2(0.03, 0)
+repeat_size = Vector2(512, 0)
+repeat_times = 10
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Background3" unique_id=1381086881]
+position = Vector2(975, 531)
+texture = ExtResource("3_76388")
+
+[node name="Background4" type="Parallax2D" parent="Parallax" unique_id=956882529]
+z_index = -12
+scale = Vector2(0.9980889, 1)
+scroll_scale = Vector2(0.05, 0)
+repeat_size = Vector2(512, 0)
+repeat_times = 10
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Background4" unique_id=997733602]
+position = Vector2(975, 544)
+texture = ExtResource("4_svatc")
+
+[node name="Background5" type="Parallax2D" parent="Parallax" unique_id=1065346175]
+z_index = -12
+scale = Vector2(0.9980889, 1)
+scroll_scale = Vector2(0.07, 0)
+repeat_size = Vector2(512, 0)
+repeat_times = 10
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Background5" unique_id=379590771]
+position = Vector2(975, 557)
+texture = ExtResource("5_ecr63")
+
+[node name="Background6" type="Parallax2D" parent="Parallax" unique_id=1876605716]
+z_index = -12
+scale = Vector2(0.9980889, 1)
+scroll_scale = Vector2(0.09, 0)
+scroll_offset = Vector2(0, 19)
+repeat_size = Vector2(512, 0)
+repeat_times = 10
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Background6" unique_id=1339384104]
+position = Vector2(975, 557)
+texture = ExtResource("6_kbo48")
+
+[node name="Background7" type="Parallax2D" parent="Parallax" unique_id=1015322635]
+z_index = -12
+scale = Vector2(0.9980889, 1)
+scroll_scale = Vector2(0.11, 0)
+scroll_offset = Vector2(0, 41)
+repeat_size = Vector2(512, 0)
+repeat_times = 10
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Background7" unique_id=69658571]
+position = Vector2(975, 557)
+texture = ExtResource("6_kbo48")
+
+[node name="Background8" type="Parallax2D" parent="Parallax" unique_id=1135083589]
+z_index = -12
+scale = Vector2(0.9980889, 1)
+scroll_scale = Vector2(0.13, 0)
+scroll_offset = Vector2(0, 82)
+repeat_size = Vector2(512, 0)
+repeat_times = 10
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Background8" unique_id=1994709597]
+position = Vector2(975, 557)
+texture = ExtResource("7_4dyl1")
+
+[node name="Background9" type="Parallax2D" parent="Parallax" unique_id=196539659]
+z_index = -12
+scale = Vector2(0.9980889, 1)
+scroll_scale = Vector2(0.17, 0)
+scroll_offset = Vector2(0, 126)
+repeat_size = Vector2(512, 0)
+repeat_times = 10
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Background9" unique_id=126501818]
+position = Vector2(975, 557)
+texture = ExtResource("7_4dyl1")
+
+[node name="Background10" type="Parallax2D" parent="Parallax" unique_id=1459300756]
+z_index = -12
+scale = Vector2(0.9980889, 0.9985454)
+scroll_scale = Vector2(0.3, 0)
+scroll_offset = Vector2(0, 171)
+repeat_size = Vector2(512, 0)
+repeat_times = 10
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Background10" unique_id=960392635]
+position = Vector2(975, 557)
+texture = ExtResource("7_4dyl1")
+
+[node name="BasicPlatform" parent="." unique_id=5699448 instance=ExtResource("2_odhdn")]
+visible = false
+position = Vector2(8, 123)
+scale = Vector2(262.6, 1)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=934792194]
+position = Vector2(-558, -226)
+zoom = Vector2(4, 4)
+limit_enabled = false
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+script = ExtResource("4_dw26h")
+character_path = NodePath("../MomentumController")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1641960431]
+stream = ExtResource("13_2meft")
+autoplay = true
+parameters/looping = false
+
+[node name="MomentumController" parent="." unique_id=1376012498 instance=ExtResource("1_bwv4p")]
+position = Vector2(-558, -225)
+scale = Vector2(0.99913794, 1)
+platform_on_leave = 2
+
+[node name="MomentumAudio" parent="MomentumController" unique_id=1925184106 instance=ExtResource("16_i2gr7")]
+
+[node name="Spindash" parent="MomentumController" unique_id=765887188 instance=ExtResource("17_t46sy")]
+
+[node name="Dropdash" parent="MomentumController" unique_id=1405822192 instance=ExtResource("18_thv4y")]
+
+[node name="SonicAnimation" parent="MomentumController" unique_id=2038550287 instance=ExtResource("19_u4kti")]

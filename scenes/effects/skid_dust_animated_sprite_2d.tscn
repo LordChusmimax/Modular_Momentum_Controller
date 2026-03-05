@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://dxtexsh6s63un"]
+
+[ext_resource type="Texture2D" uid="uid://ck2jidrlqrf60" path="res://spritesheets/skid_dust.png" id="1_7paev"]
+[ext_resource type="Script" uid="uid://c5dy8a0uecjr3" path="res://scenes/effects/skid_dust_animated_sprite_2d.gd" id="2_5f0x7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ofy33"]
+atlas = ExtResource("1_7paev")
+region = Rect2(2, 2, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3et6r"]
+atlas = ExtResource("1_7paev")
+region = Rect2(26, 2, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_so3kc"]
+atlas = ExtResource("1_7paev")
+region = Rect2(2, 26, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ohau6"]
+atlas = ExtResource("1_7paev")
+region = Rect2(26, 26, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tc861"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ofy33")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3et6r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_so3kc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ohau6")
+}],
+"loop": false,
+"name": &"Skid",
+"speed": 15.0
+}]
+
+[node name="SkidDustAnimatedSprite2D" type="AnimatedSprite2D" unique_id=1125306899]
+sprite_frames = SubResource("SpriteFrames_tc861")
+animation = &"Skid"
+autoplay = "Skid"
+frame = 3
+frame_progress = 1.0
+script = ExtResource("2_5f0x7")

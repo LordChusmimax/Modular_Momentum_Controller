@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://vreoxbnqv3h7"]
+
+[ext_resource type="Script" uid="uid://croyd84acoc8i" path="res://scenes/MomentumController/Modules/momentum_audio.gd" id="1_15yua"]
+[ext_resource type="AudioStream" uid="uid://o8w0xcm1vhp5" path="res://sounds/S2_20.wav" id="2_ucmtl"]
+[ext_resource type="AudioStream" uid="uid://bwuxjleyoitsp" path="res://sounds/S2_3E.wav" id="3_wwb5w"]
+
+[node name="MomentumAudio" type="Node2D" unique_id=1925184106]
+script = ExtResource("1_15yua")
+
+[node name="JumpSound" type="AudioStreamPlayer2D" parent="." unique_id=1018429421]
+stream = ExtResource("2_ucmtl")
+
+[node name="RollSound" type="AudioStreamPlayer2D" parent="." unique_id=39976205]
+stream = ExtResource("3_wwb5w")

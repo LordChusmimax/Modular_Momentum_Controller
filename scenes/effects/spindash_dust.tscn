@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://bpxrg3jxslirg"]
+
+[ext_resource type="Texture2D" uid="uid://isqkdxo6480i" path="res://spritesheets/spindash_dust.png" id="1_pssbw"]
+[ext_resource type="Script" uid="uid://byisi4ck7prgk" path="res://scenes/effects/spindash_dust.gd" id="2_nedtv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_angiw"]
+atlas = ExtResource("1_pssbw")
+region = Rect2(5, 4, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fn386"]
+atlas = ExtResource("1_pssbw")
+region = Rect2(57, 4, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4lneg"]
+atlas = ExtResource("1_pssbw")
+region = Rect2(109, 4, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vmd3o"]
+atlas = ExtResource("1_pssbw")
+region = Rect2(161, 4, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x71x7"]
+atlas = ExtResource("1_pssbw")
+region = Rect2(213, 4, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jn0fq"]
+atlas = ExtResource("1_pssbw")
+region = Rect2(265, 4, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0imfh"]
+atlas = ExtResource("1_pssbw")
+region = Rect2(317, 4, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6lkxh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_angiw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fn386")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4lneg")
+}],
+"loop": true,
+"name": &"Charge",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vmd3o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x71x7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jn0fq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0imfh")
+}],
+"loop": false,
+"name": &"Release",
+"speed": 10.0
+}]
+
+[node name="SpindashDustAnimator2d" type="AnimatedSprite2D" unique_id=1265230612]
+sprite_frames = SubResource("SpriteFrames_6lkxh")
+animation = &"Release"
+script = ExtResource("2_nedtv")
