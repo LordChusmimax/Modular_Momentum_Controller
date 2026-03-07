@@ -7,6 +7,10 @@ var _on_ground:bool = false
 var _down_is_hold : bool = false
 var spindash_state : bool = false
 
+#Spindash speed when uncharged
+@export var spindash_min_speed : float = 500.0
+
+#Spindash speed when fully charged
 @export var spindash_max_speed : float = 1500.0
 
 var spindash_charge : float = 0
@@ -56,9 +60,15 @@ func _handle_spindash_state(delta:float)->void:
 	spindash_charge = move_toward(spindash_charge,0,delta/1.5)
 	
 func _spindash_release() -> void:
+	var variable_speed_ratio : float = 1-spindash_min_speed/spindash_max_speed
+	var spindash_speed_range: float = spindash_max_speed-spindash_min_speed
+	var charge_ratio : float = variable_speed_ratio * spindash_charge 
+	var extra_speed: float = spindash_speed_range * charge_ratio
+	var launch_speed: float = spindash_min_speed + extra_speed
+	
 	spindash_state=false
 	momentum_controller.force_state(momentum_controller.State.SPIN)
-	momentum_controller.ground_speed = (spindash_max_speed/3 + spindash_max_speed * spindash_charge * 2/3) * spindash_direction_sign
+	momentum_controller.change_velocity(launch_speed,spindash_direction_sign)
 	spindash_dust_scene.release_spindash_dust()
 	spindash_audio.release_spindash()
 

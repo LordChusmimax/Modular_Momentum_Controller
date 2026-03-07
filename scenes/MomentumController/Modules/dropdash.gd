@@ -39,7 +39,7 @@ func _dropdash_landing() -> void:
 	if dropdash_charged:
 		dropdash_audio.land_dropdash()
 		momentum_controller.force_state(momentum_controller.State.SPIN)
-		momentum_controller.ground_speed = max(dropdash_speed, momentum_controller.ground_speed) * momentum_controller.last_direction_sign
+		momentum_controller.change_velocity(max(dropdash_speed, momentum_controller.ground_speed), momentum_controller.last_direction_sign)
 		dropdash_charged = false
 		dropdash_dust_scene.create_dropdash_dust()
 		

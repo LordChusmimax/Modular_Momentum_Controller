@@ -631,6 +631,18 @@ func force_state(new_state: State) -> void:
 		last_state = current_state
 		current_state = new_state
 		state_changed.emit(last_state,current_state)
+		
+##Changes the speed of the controller
+##Direction 0 or no direction means we keep the current direction
+func change_velocity(module: float, direction: float = 0) -> void:
+	direction = direction if direction!=0 else sign(ground_speed) 
+	ground_speed = module * direction
+
+##Adds speed to the controller
+##Direction 0 or no direction means we keep the current direction
+func add_velocity(module: float, direction: float = 0) -> void:
+	direction = direction if direction!=0 else sign(ground_speed) 
+	ground_speed += module * direction
 
 # ============================================
 # TIMERS
