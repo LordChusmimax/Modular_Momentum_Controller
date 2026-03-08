@@ -113,6 +113,7 @@ var flipped_image:bool = false
 var down_is_held:bool = false
 
 enum State {GROUND, AIR, JUMP, SPIN, COYOTE, COYOTE_SPIN, SPECIAL}
+var special_state :String = "Default"
 
 var ground_speed: float = 0.0
 var x_speed: float = 0.0
@@ -626,11 +627,15 @@ func _update_sensor_lengths(delta: float) -> void:
 # ============================================
 ##Forces the controller into a specific State.
 ##Use Special for an undefined one
-func force_state(new_state: State) -> void:
+func force_state(new_state: State, state_name: String = "Default") -> void:
 	if current_state != new_state:
 		last_state = current_state
 		current_state = new_state
 		state_changed.emit(last_state,current_state)
+		if current_state == State.SPECIAL:
+			special_state = state_name
+		else:
+			state_name = "Default"
 		
 ##Changes the speed of the controller
 ##Direction 0 or no direction means we keep the current direction

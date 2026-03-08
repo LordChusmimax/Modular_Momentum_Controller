@@ -157,8 +157,10 @@ func _set_jump_animation(direction:float) -> void:
 		play("Jump")
 	
 func _set_special_animation(direction:float) -> void:
-	if spindash_present and spindash.spindash_state:
-		play("Spindash")
+	if spindash_present:
+		var spindash_state = momentum_controller.special_state == spindash.special_name
+		if spindash_state:
+			play("Spindash")
 
 
 func _down_pressed() -> void:

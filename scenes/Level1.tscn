@@ -1,7 +1,6 @@
 [gd_scene format=4 uid="uid://nwoojb81aoln"]
 
 [ext_resource type="TileSet" uid="uid://bh5iuw67inko5" path="res://spritesheets/emeral_hill.tres" id="1_4dyl1"]
-[ext_resource type="PackedScene" uid="uid://cx7iimudr2qwh" path="res://scenes/MomentumController/character.tscn" id="1_bwv4p"]
 [ext_resource type="Script" uid="uid://ckgq08q7ylqar" path="res://scripts/test_loop.gd" id="2_2meft"]
 [ext_resource type="Texture2D" uid="uid://dw46nkvw7mtg7" path="res://spritesheets/emeral_hill_background1.png" id="2_dw26h"]
 [ext_resource type="Texture2D" uid="uid://drfovjhpfcdrh" path="res://spritesheets/emeral_hill_background2.png" id="2_lrl65"]
@@ -15,10 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://c1bf5dmwfkxmj" path="res://spritesheets/emeral_hill_background6.png" id="6_kbo48"]
 [ext_resource type="Texture2D" uid="uid://w65b0btov7yy" path="res://spritesheets/emeral_hill_background7.png" id="7_4dyl1"]
 [ext_resource type="AudioStream" uid="uid://q4sx4bkomxms" path="res://sounds/02 - Emerald Hill Zone MP3.mp3" id="13_2meft"]
-[ext_resource type="PackedScene" uid="uid://vreoxbnqv3h7" path="res://scenes/MomentumController/Modules/momentum_audio.tscn" id="16_i2gr7"]
-[ext_resource type="PackedScene" uid="uid://b6hx2wl8dque4" path="res://scenes/MomentumController/Modules/spindash.tscn" id="17_t46sy"]
-[ext_resource type="PackedScene" uid="uid://dj5f5b0wgvos1" path="res://scenes/MomentumController/Modules/dropdash.tscn" id="18_thv4y"]
-[ext_resource type="PackedScene" uid="uid://did75mn8fg3yc" path="res://scenes/MomentumController/Modules/sonic_animation.tscn" id="19_u4kti"]
+[ext_resource type="PackedScene" uid="uid://dut7pxnf2rnwq" path="res://scenes/Prefabs/Characters/Tails.tscn" id="15_ipmer"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ipmer"]
 size = Vector2(29, 31.75)
@@ -959,22 +955,11 @@ limit_enabled = false
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 script = ExtResource("4_dw26h")
-character_path = NodePath("../MomentumController")
+character_path = NodePath("../Tails")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1641960431]
 stream = ExtResource("13_2meft")
 autoplay = true
 parameters/looping = false
 
-[node name="MomentumController" parent="." unique_id=1376012498 instance=ExtResource("1_bwv4p")]
-position = Vector2(-558, -225)
-scale = Vector2(0.99913794, 1)
-platform_on_leave = 2
-
-[node name="MomentumAudio" parent="MomentumController" unique_id=1925184106 instance=ExtResource("16_i2gr7")]
-
-[node name="Spindash" parent="MomentumController" unique_id=765887188 instance=ExtResource("17_t46sy")]
-
-[node name="Dropdash" parent="MomentumController" unique_id=1405822192 instance=ExtResource("18_thv4y")]
-
-[node name="SonicAnimation" parent="MomentumController" unique_id=2038550287 instance=ExtResource("19_u4kti")]
+[node name="Tails" parent="." unique_id=1376012498 instance=ExtResource("15_ipmer")]
