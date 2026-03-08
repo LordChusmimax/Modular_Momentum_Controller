@@ -944,8 +944,7 @@ position = Vector2(975, 557)
 texture = ExtResource("7_4dyl1")
 
 [node name="BasicPlatform" parent="." unique_id=5699448 instance=ExtResource("2_odhdn")]
-visible = false
-position = Vector2(8, 123)
+position = Vector2(-11, -157)
 scale = Vector2(262.6, 1)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=934792194]

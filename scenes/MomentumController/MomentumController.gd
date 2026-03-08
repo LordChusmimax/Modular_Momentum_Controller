@@ -6,6 +6,10 @@ class_name MomentumController
 # ============================================
 signal state_changed(old_state: State, new_state: State)
 signal jumped()
+signal ground_signal(touching: bool)
+signal ceil_signal(touching: bool)
+signal left_wall_signal(touching: bool)
+signal right_wall_signal(touching: bool)
 
 # ============================================
 # EXPORTS
@@ -15,7 +19,7 @@ signal jumped()
 @export var max_ground_speed: float = 1250.0
 ##Acceleration on the ground
 @export var ground_acceleration: float = 100.0
-##Resistance of the ground to movement
+##Resistance of the ground to movementd
 @export var ground_friction: float = 100.0
 ##Breaking strength
 @export var ground_deceleration: float = 1000.0
@@ -124,6 +128,11 @@ var last_state: int = State.AIR
 var last_normal: Vector2 = Vector2.UP
 var last_direction_sign : float = 1
 
+var touching_ground:bool = false
+var touching_ceil:bool = false
+var touching_left_wall:bool = false
+var touching_right_wall:bool = false
+
 # ============================================
 # PRIVATE VARIABLES
 # ============================================
@@ -150,21 +159,20 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	
-	var hit_floor_left: bool = sensor_floor_left.is_colliding()
-	var hit_floor_right: bool = sensor_floor_right.is_colliding()
-	
 	if sign(direction)!=0:
 		last_direction_sign = sign(direction)
+	
+	_raycast_check()
 	
 	_check_state(direction)
 
 	
 	match current_state:
 		State.GROUND:
-			_handle_ground_state(delta, direction, hit_floor_left)
+			_handle_ground_state(delta, direction)
 			
 		State.SPIN:
-			_handle_spin_state(delta, direction, hit_floor_left)
+			_handle_spin_state(delta, direction)
 			
 		State.COYOTE:
 			_handle_coyote_state(delta, direction)
@@ -184,20 +192,22 @@ func _physics_process(delta: float) -> void:
 # ============================================
 # States
 # ============================================
-func _handle_ground_state(delta:float, direction:float, hit_floor_left:bool) -> void :
+func _handle_ground_state(delta:float, direction:float) -> void :
+	var hit_floor_left = sensor_floor_left.is_colliding()
+	var hit_floor_right = sensor_floor_right.is_colliding()
+	
 	rotation = _get_floor_angle()
 	var sensor: RayCast2D
 	if ground_speed >=0 :
 		sensor	= sensor_floor_left if hit_floor_left else sensor_floor_right
 	else:
-		sensor	= sensor_floor_left if hit_floor_left else sensor_floor_right
+		sensor	= sensor_floor_right if hit_floor_right else sensor_floor_left
 	var hit_point: Vector2 = sensor.get_collision_point()
 	var hit_normal: Vector2 = sensor.get_collision_normal()
 	var tangent: Vector2 = Vector2(-hit_normal.y, hit_normal.x)
 			
 	if last_state == State.AIR or last_state == State.JUMP:
-		var projected : Vector2 = Vector2(x_speed, y_speed).project(tangent)
-		ground_speed = projected.length() * sign(projected.dot(tangent))
+		directional_to_ground_speed()
 			
 			
 	_ground_speed_ground_calculation(delta,direction,tangent)
@@ -207,28 +217,31 @@ func _handle_ground_state(delta:float, direction:float, hit_floor_left:bool) -> 
 	if jump_buffered:
 		_jump(tangent,hit_normal)
 		_directionals_air_calculation(delta,direction)
-		move_and_collide(Vector2(x_speed, y_speed) * delta)
+		move_air(delta)
 		return
 	
-	_side_collision()
+	side_collision()
 	var fallen = _slope_slip(delta,tangent)
 	if fallen:
-		_side_collision_air()
+		side_collision_air()
 		_directionals_air_calculation(delta,direction)
-		move_and_collide(Vector2(x_speed, y_speed) * delta)
+		move_air(delta)
 		return
 	_ground_move(delta,tangent)
 	_ground_speed_to_directionals(tangent)
 					
 	last_normal = hit_normal
 	
-func _handle_spin_state(delta:float, direction:float, hit_floor_left:bool)->void:
+func _handle_spin_state(delta:float, direction:float)->void:
+	var hit_floor_left = sensor_floor_left.is_colliding()
+	var hit_floor_right = sensor_floor_right.is_colliding()
+	
 	rotation = _get_floor_angle()
 	var sensor: RayCast2D
 	if ground_speed >=0 :
 		sensor	= sensor_floor_left if hit_floor_left else sensor_floor_right
 	else:
-		sensor	= sensor_floor_left if hit_floor_left else sensor_floor_right
+		sensor	= sensor_floor_right if hit_floor_right else sensor_floor_left
 	var hit_point: Vector2 = sensor.get_collision_point()
 	var hit_normal: Vector2 = sensor.get_collision_normal()
 	var tangent: Vector2 = Vector2(-hit_normal.y, hit_normal.x)
@@ -239,14 +252,14 @@ func _handle_spin_state(delta:float, direction:float, hit_floor_left:bool)->void
 	if jump_buffered:
 		_jump(tangent,hit_normal)
 		_directionals_air_calculation(delta,direction)
-		move_and_collide(Vector2(x_speed, y_speed) * delta)
+		move_air(delta)
 		return
-	_side_collision()
+	side_collision()
 	var fallen = _slope_slip(delta,tangent)
 	if fallen:
-		_side_collision_air()
+		side_collision_air()
 		_directionals_air_calculation(delta,direction)
-		move_and_collide(Vector2(x_speed, y_speed) * delta)
+		move_air(delta)
 		return
 	_ground_move(delta,tangent)
 	_ground_speed_to_directionals(tangent)
@@ -259,26 +272,25 @@ func _handle_air_state(delta:float, direction:float)->void:
 	rotation = 0
 	if y_speed<0:
 		_ceiling_collision()
-	_side_collision_air()
+	side_collision_air()
 	_directionals_air_calculation(delta,direction)
-	move_and_collide(Vector2(x_speed, y_speed) * delta)
+	move_air(delta)
 	
 func _handle_jump_state(delta:float, direction:float)->void:
 	
 	rotation = 0
 	if y_speed<0:
 		_ceiling_collision()
-	_side_collision_air()
+	side_collision_air()
 	_directionals_air_calculation(delta,direction)
-	move_and_collide(Vector2(x_speed, y_speed) * delta)
+	move_air(delta)
 			
 func _handle_coyote_state(delta:float, direction:float)->void:
 	var hit_normal: Vector2 = last_normal
 	var tangent: Vector2 = Vector2(-hit_normal.y, hit_normal.x)
 	
 	if last_state == State.AIR or last_state == State.JUMP:
-		var projected : Vector2 = Vector2(x_speed, y_speed).project(tangent)
-		ground_speed = projected.length() * sign(projected.dot(tangent))
+		directional_to_ground_speed()
 	
 	
 	_ground_speed_ground_calculation(delta,direction,tangent)
@@ -287,10 +299,10 @@ func _handle_coyote_state(delta:float, direction:float)->void:
 	if jump_buffered:
 		_jump(tangent,hit_normal)
 		_directionals_air_calculation(delta,direction)
-		move_and_collide(Vector2(x_speed, y_speed) * delta)
+		move_air(delta)
 		return
 	
-	_side_collision()
+	side_collision()
 	_ground_move(delta,tangent)
 	_ground_speed_to_directionals(tangent)
 	
@@ -299,8 +311,7 @@ func _handle_coyote_spin_state(delta:float, direction:float)->void:
 	var tangent: Vector2 = Vector2(-hit_normal.y, hit_normal.x)
 	
 	if last_state == State.AIR or last_state == State.JUMP:
-		var projected : Vector2 = Vector2(x_speed, y_speed).project(tangent)
-		ground_speed = projected.length() * sign(projected.dot(tangent))
+		directional_to_ground_speed()
 	
 	
 	_ground_speed_spin_calculation(delta,direction,tangent)
@@ -309,10 +320,10 @@ func _handle_coyote_spin_state(delta:float, direction:float)->void:
 	if jump_buffered:
 		_jump(tangent,hit_normal)
 		_directionals_air_calculation(delta,direction)
-		move_and_collide(Vector2(x_speed, y_speed) * delta)
+		move_air(delta)
 		return
 	
-	_side_collision()
+	side_collision()
 	_ground_move(delta,tangent)
 	_ground_speed_to_directionals(tangent)
 	
@@ -329,7 +340,7 @@ func _check_state(direction: float) -> void:
 	var floor_angle:float = 0
 	var angle_left: float = 0.0
 	var angle_right: float = 0.0
-	var diff_left: float = 180.0  # Valor máximo como default
+	var diff_left: float = 180.0
 	var diff_right: float = 180.0
 	
 	var hit_floor: bool = sensor_floor_left.is_colliding() or sensor_floor_right.is_colliding()
@@ -559,12 +570,31 @@ func _directionals_air_calculation(delta: float,direction: float) -> void:
 # ============================================
 # COLLISIONS
 # ============================================
+func _raycast_check() -> void:
+	var hit_ceil: bool = sensor_ceil_left.is_colliding() or sensor_ceil_right.is_colliding()
+	var hit_floor: bool = sensor_floor_left.is_colliding() or sensor_floor_right.is_colliding()
+	var hit_left_wall: bool = sensor_wall_left.is_colliding()
+	var hit_right_wall: bool = sensor_wall_right.is_colliding()
+	
+	if touching_ceil != hit_ceil:
+		ceil_signal.emit(hit_ceil)
+		touching_ceil = hit_ceil
+	if touching_ground != hit_floor:
+		ground_signal.emit(hit_floor)
+		touching_ground = hit_floor
+	if touching_left_wall != hit_left_wall:
+		left_wall_signal.emit(hit_left_wall)
+		touching_left_wall = hit_left_wall
+	if touching_right_wall != hit_right_wall:
+		right_wall_signal.emit(hit_right_wall)
+		touching_right_wall = hit_right_wall
+
 func _ceiling_collision() -> void:
-	var hit_ceiling: bool = sensor_ceil_left.is_colliding() or sensor_ceil_right.is_colliding()
-	if hit_ceiling:
+	var hit_ceil: bool = sensor_ceil_left.is_colliding() or sensor_ceil_right.is_colliding()
+	if hit_ceil:
 		y_speed=0
 		
-func _side_collision() -> void:
+func side_collision() -> void:
 	sensor_wall_left.force_raycast_update()
 	sensor_wall_right.force_raycast_update()
 	var rotated_offset = Vector2(sensor_wall_offset, 0).rotated(rotation)
@@ -579,7 +609,7 @@ func _side_collision() -> void:
 			global_position = sensor_wall_right.get_collision_point() + sensor_wall_right.position.rotated(rotation) - rotated_offset
 			ground_speed = min(ground_speed,0)
 			
-func _side_collision_air() -> void:
+func side_collision_air() -> void:
 	sensor_wall_left.force_raycast_update()
 	sensor_wall_right.force_raycast_update()
 	var offset_vector = Vector2(sensor_wall_offset, 0)
@@ -637,17 +667,55 @@ func force_state(new_state: State, state_name: String = "Default") -> void:
 		else:
 			state_name = "Default"
 		
-##Changes the speed of the controller
+##Changes the ground_speed of the controller
 ##Direction 0 or no direction means we keep the current direction
 func change_velocity(module: float, direction: float = 0) -> void:
 	direction = direction if direction!=0 else sign(ground_speed) 
 	ground_speed = module * direction
 
-##Adds speed to the controller
+##Adds ground_speed to the controller
 ##Direction 0 or no direction means we keep the current direction
 func add_velocity(module: float, direction: float = 0) -> void:
 	direction = direction if direction!=0 else sign(ground_speed) 
 	ground_speed += module * direction
+
+##Changes x_speed and y_speed of the controller	
+##Direction 0 or no direction means we keep the current direction
+func change_air_velocity(new_x_speed: float, new_y_speed: float) -> void:
+	x_speed = new_x_speed
+	y_speed = new_y_speed
+	
+##Adds x_speed and y_speed to the controller	
+##Direction 0 or no direction means we keep the current direction
+func add_air_velocity(new_x_speed: float, new_y_speed: float) -> void:
+	x_speed += new_x_speed
+	y_speed += new_y_speed
+
+func cap_air_velocity(new_x_speed: float, new_y_speed: float) -> void:
+	if new_x_speed !=0:
+		x_speed = x_speed if abs(x_speed)<= abs(new_x_speed) else new_x_speed*sign(x_speed)
+	if new_y_speed !=0:
+		y_speed = y_speed if abs(y_speed)<= abs(new_y_speed) else new_y_speed*sign(y_speed)
+
+func move_air(delta:float):
+	move_and_collide(Vector2(x_speed, y_speed) * delta)
+	
+func directional_to_ground_speed():
+	
+	var hit_floor_left = sensor_floor_left.is_colliding()
+	var hit_floor_right = sensor_floor_right.is_colliding()
+
+	var sensor: RayCast2D
+	if ground_speed >=0 :
+		sensor	= sensor_floor_left if hit_floor_left else sensor_floor_right
+	else:
+		sensor	= sensor_floor_right if hit_floor_right else sensor_floor_left
+	var hit_normal: Vector2 = sensor.get_collision_normal()
+	var tangent: Vector2 = Vector2(-hit_normal.y, hit_normal.x)
+	
+	var projected : Vector2 = Vector2(x_speed, y_speed).project(tangent)
+	ground_speed = projected.length() * sign(projected.dot(tangent))
+	
 
 # ============================================
 # TIMERS
