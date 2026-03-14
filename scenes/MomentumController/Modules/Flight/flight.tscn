@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bkaocv3rb4tmr"]
+
+[ext_resource type="Script" uid="uid://od52r5jb2fr0" path="res://scenes/MomentumController/Modules/Flight/flight.gd" id="1_ptvyh"]
+
+[node name="Flight" type="Node2D" unique_id=1426147951]
+script = ExtResource("1_ptvyh")
+
+[node name="TiredTimer" type="Timer" parent="." unique_id=333984863]

@@ -10,16 +10,19 @@ const  special_name : String = "Flight"
 @export var max_fall_speed:float = 400
 
 @onready var momentum_controller: MomentumController = $".."
+@onready var tired_timer: Timer = $TiredTimer
 
 var _on_jump:bool = false
 var flying:bool = false
 var ceil_hit: bool = false
 var direction: float
+var tired: bool = false
 
 func _ready() -> void:
 	momentum_controller.state_changed.connect(_controller_state_changed)
 	momentum_controller.ground_signal.connect(_land)
 	momentum_controller.ceil_signal.connect(_ceiling_collision)
+	tired_timer.timeout.connect(_tired_timer_timeout)
 	PlayerInput.jump_pressed.connect(_spindash_pressed)
 	PlayerInput.changed_direction.connect(_changed_direction)
 	pass
@@ -46,9 +49,10 @@ func _spindash_pressed() -> void:
 func _start_flight() -> void:
 	momentum_controller.change_air_velocity(momentum_controller.x_speed,-flight_propulsion)
 	flying = true
+	tired_timer.start(8)
 	
 func _propell() -> void:
-	if ceil_hit:
+	if ceil_hit or tired:
 		return
 	momentum_controller.change_air_velocity(momentum_controller.x_speed,-flight_propulsion)
 	
@@ -67,6 +71,7 @@ func _land(landed: bool) -> void:
 	momentum_controller.force_state(momentum_controller.State.GROUND)
 	momentum_controller.directional_to_ground_speed()
 	flying = false
+	tired = false
 
 func _ceiling_collision(hit: bool) -> void:
 	if !flying:
@@ -78,3 +83,7 @@ func _ceiling_collision(hit: bool) -> void:
 		
 func _changed_direction(new_direction: float) -> void:
 	direction = new_direction
+
+func _tired_timer_timeout() -> void:
+	tired = true
+	

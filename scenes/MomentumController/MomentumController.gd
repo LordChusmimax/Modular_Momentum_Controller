@@ -665,7 +665,7 @@ func force_state(new_state: State, state_name: String = "Default") -> void:
 		if current_state == State.SPECIAL:
 			special_state = state_name
 		else:
-			state_name = "Default"
+			special_state = "Default"
 		
 ##Changes the ground_speed of the controller
 ##Direction 0 or no direction means we keep the current direction

@@ -73,6 +73,9 @@ func _spindash_release() -> void:
 	
 	spindash_state=false
 	momentum_controller.force_state(momentum_controller.State.SPIN)
+	print(momentum_controller.special_state)
+	print(special_name)
+	print(momentum_controller.special_state == special_name)
 	momentum_controller.change_velocity(launch_speed,spindash_direction_sign)
 	spindash_dust_scene.release_spindash_dust()
 	spindash_audio.release_spindash()
