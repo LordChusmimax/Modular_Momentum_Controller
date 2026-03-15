@@ -283,7 +283,7 @@ animations = [{
 sprite_frames = SubResource("SpriteFrames_qwon6")
 animation = &"TiredFlight"
 autoplay = "Idle"
-frame_progress = 0.24714044
+frame_progress = 0.9020904
 script = ExtResource("2_xi15p")
 
 [node name="SkidSound" type="AudioStreamPlayer2D" parent="." unique_id=719024427]

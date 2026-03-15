@@ -1,6 +1,8 @@
 extends Node2D
 class_name Flight
 
+signal set_flight(flying:bool)
+
 const  special_name : String = "Flight"
 
 @export var flight_propulsion:float = 100
@@ -43,6 +45,7 @@ func _spindash_pressed() -> void:
 	if _on_jump and not_on_special:
 		momentum_controller.force_state(momentum_controller.State.SPECIAL, special_name)
 		_start_flight()
+		set_flight.emit(true)
 	elif flying:
 		_propell()
 
@@ -67,7 +70,9 @@ func _move(delta:float) -> void:
 func _land(landed: bool) -> void:
 	if not flying or not landed:
 		return
-			
+		
+	set_flight.emit(false)
+	tired_timer.stop()
 	momentum_controller.force_state(momentum_controller.State.GROUND)
 	momentum_controller.directional_to_ground_speed()
 	flying = false

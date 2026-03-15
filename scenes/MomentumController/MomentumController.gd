@@ -367,7 +367,7 @@ func _check_state(direction: float) -> void:
 		State.GROUND:
 			if just_jumped:
 				current_state = State.AIR
-			elif down_is_held and hit_floor and abs(ground_speed) > 100 and abs(direction)<0:
+			elif down_is_held and hit_floor and abs(ground_speed) > 100:
 				current_state = State.SPIN
 			elif hit_floor and angle_difference<45:
 				current_state = State.GROUND

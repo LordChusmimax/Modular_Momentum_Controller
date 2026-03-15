@@ -1,10 +1,10 @@
 extends AnimatedSprite2D
-class_name SonicAnimation
+class_name TailsAnimation
 
 @onready var momentum_controller: MomentumController = $".."
 @onready var skid_sound: AudioStreamPlayer2D = $SkidSound
 @onready var spindash: Node2D = $"../Spindash"
-@onready var dropdash: Dropdash = $"../Dropdash"
+@onready var flight: Flight = $"../Flight"
 
 var force_animation : bool = false
 var skid_dust_ready : bool = true
@@ -14,7 +14,7 @@ var down_is_held : bool = false
 var direction : float = 0
 
 var spindash_present : bool = false
-var dropdash_present : bool = false 
+var flight_present : bool = false
 
 @onready var skid_dust_scene: Node2D = $SkidDustScene
 @onready var skid_dust_timer: Timer = $SkidDustTimer
@@ -30,8 +30,9 @@ func _ready() -> void:
 	
 	if spindash != null:
 		spindash_present = true
-	if dropdash != null:
-		dropdash_present = true
+		
+	if flight != null:
+		flight_present = true
 
 func _process(delta: float) -> void:
 	
@@ -151,18 +152,20 @@ func _set_jump_animation(direction:float) -> void:
 		momentum_controller.flipped_image = direction<0
 		flip_h = momentum_controller.flipped_image
 	speed_scale=1
-	if dropdash_present and dropdash.dropdash_charged:
-		play("Dropdash")
-	else:
-		play("Jump")
+	play("Jump")
 	
 func _set_special_animation(direction:float) -> void:
 	if spindash_present:
 		var spindash_state = momentum_controller.special_state == spindash.special_name
 		if spindash_state:
 			play("Spindash")
-
-
+			
+	if flight_present:
+		var flight_state = momentum_controller.special_state == flight.special_name
+		if flight_state:
+			flip_h = sign(direction) == -1 if sign(direction)!=0 else flip_h
+			play("Fly")
+		
 func _down_pressed() -> void:
 	down_is_held = true
 
