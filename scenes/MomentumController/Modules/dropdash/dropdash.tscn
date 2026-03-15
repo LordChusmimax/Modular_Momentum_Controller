@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://dj5f5b0wgvos1"]
 
-[ext_resource type="Script" uid="uid://bxpdsoi5edccn" path="res://scenes/MomentumController/Modules/dropdash.gd" id="1_8ptgf"]
-[ext_resource type="Script" uid="uid://cnx4m1wrey4wu" path="res://scenes/MomentumController/Modules/dropdash_audio.gd" id="2_06hrk"]
+[ext_resource type="Script" uid="uid://bxpdsoi5edccn" path="res://scenes/MomentumController/Modules/dropdash/dropdash.gd" id="1_8ptgf"]
+[ext_resource type="Script" uid="uid://cnx4m1wrey4wu" path="res://scenes/MomentumController/Modules/dropdash/dropdash_audio.gd" id="2_06hrk"]
 [ext_resource type="AudioStream" uid="uid://bhx6p1nsq4spp" path="res://sounds/S2_60.wav" id="3_e43tg"]
 [ext_resource type="AudioStream" uid="uid://cvrao68f2b5vi" path="res://sounds/S2_3C.wav" id="4_e1pq2"]
-[ext_resource type="Script" uid="uid://c6gx8nmtl2nm" path="res://scenes/MomentumController/Modules/dropdash_dust_scene.gd" id="5_7fpi6"]
+[ext_resource type="Script" uid="uid://c6gx8nmtl2nm" path="res://scenes/MomentumController/Modules/dropdash/dropdash_dust_scene.gd" id="5_7fpi6"]
 
 [node name="Dropdash" type="Node2D" unique_id=1405822192]
 script = ExtResource("1_8ptgf")

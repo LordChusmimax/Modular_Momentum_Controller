@@ -13,6 +13,8 @@ const  special_name : String = "Flight"
 
 @onready var momentum_controller: MomentumController = $".."
 @onready var tired_timer: Timer = $TiredTimer
+@onready var fly_sound: AudioStreamPlayer2D = $FlySound
+@onready var tired_sound: AudioStreamPlayer2D = $TiredSound
 
 var _on_jump:bool = false
 var flying:bool = false
@@ -60,6 +62,10 @@ func _propell() -> void:
 	momentum_controller.change_air_velocity(momentum_controller.x_speed,-flight_propulsion)
 	
 func _fly(delta:float) -> void:
+	if tired and not tired_sound.playing:
+		tired_sound.play()
+	elif not tired and not fly_sound.playing:
+		fly_sound.play()
 	momentum_controller.add_air_velocity(0,flight_gravity*delta)
 	momentum_controller.cap_air_velocity(0,max_fall_speed)
 	momentum_controller.move_air(delta)

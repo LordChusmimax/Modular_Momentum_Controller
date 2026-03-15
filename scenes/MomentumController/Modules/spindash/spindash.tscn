@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://b6hx2wl8dque4"]
 
-[ext_resource type="Script" uid="uid://bktr688slcf1o" path="res://scenes/MomentumController/Modules/spindash.gd" id="1_8kcfe"]
-[ext_resource type="Script" uid="uid://c85sqf6mmjvwd" path="res://scenes/MomentumController/Modules/spindash_audio.gd" id="2_cd0tx"]
+[ext_resource type="Script" uid="uid://bktr688slcf1o" path="res://scenes/MomentumController/Modules/spindash/spindash.gd" id="1_8kcfe"]
+[ext_resource type="Script" uid="uid://c85sqf6mmjvwd" path="res://scenes/MomentumController/Modules/spindash/spindash_audio.gd" id="2_cd0tx"]
 [ext_resource type="AudioStream" uid="uid://bhx6p1nsq4spp" path="res://sounds/S2_60.wav" id="3_qx2i7"]
 [ext_resource type="AudioStream" uid="uid://cvrao68f2b5vi" path="res://sounds/S2_3C.wav" id="4_bywcr"]
-[ext_resource type="Script" uid="uid://bvlqiapu8upb5" path="res://scenes/MomentumController/Modules/spindash_dust_scene.gd" id="5_brppl"]
+[ext_resource type="Script" uid="uid://bvlqiapu8upb5" path="res://scenes/MomentumController/Modules/spindash/spindash_dust_scene.gd" id="5_brppl"]
 
 [node name="Spindash" type="Node2D" unique_id=765887188]
 script = ExtResource("1_8kcfe")

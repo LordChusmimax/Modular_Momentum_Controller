@@ -66,6 +66,7 @@ animations = [{
 }]
 
 [node name="SpindashDustAnimator2d" type="AnimatedSprite2D" unique_id=1265230612]
+z_index = 2
 sprite_frames = SubResource("SpriteFrames_6lkxh")
 animation = &"Release"
 script = ExtResource("2_nedtv")

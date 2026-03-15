@@ -2,12 +2,12 @@
 
 [ext_resource type="PackedScene" uid="uid://cx7iimudr2qwh" path="res://scenes/MomentumController/character.tscn" id="1_krusu"]
 [ext_resource type="PackedScene" uid="uid://vreoxbnqv3h7" path="res://scenes/MomentumController/Modules/momentum_audio.tscn" id="2_jilna"]
-[ext_resource type="PackedScene" uid="uid://b6hx2wl8dque4" path="res://scenes/MomentumController/Modules/spindash.tscn" id="3_fs4rr"]
+[ext_resource type="PackedScene" uid="uid://b6hx2wl8dque4" path="res://scenes/MomentumController/Modules/spindash/spindash.tscn" id="3_fs4rr"]
 [ext_resource type="PackedScene" uid="uid://bkaocv3rb4tmr" path="res://scenes/MomentumController/Modules/Flight/flight.tscn" id="4_krusu"]
 [ext_resource type="PackedScene" uid="uid://bo3i3m4ejeef" path="res://scenes/MomentumController/Modules/tails_animation.tscn" id="5_krusu"]
-[ext_resource type="Script" uid="uid://b5p322wf5i8n1" path="res://scenes/MomentumController/Modules/tails_animation.gd" id="6_jilna"]
 
 [node name="Tails" unique_id=1376012498 instance=ExtResource("1_krusu")]
+z_index = 2
 
 [node name="MomentumAudio" parent="." index="5" unique_id=1925184106 instance=ExtResource("2_jilna")]
 
@@ -16,7 +16,4 @@
 [node name="Flight" parent="." index="7" unique_id=1426147951 instance=ExtResource("4_krusu")]
 
 [node name="TailsAnimation" parent="." index="8" unique_id=2038550287 instance=ExtResource("5_krusu")]
-position = Vector2(0, 3)
-animation = &"Idle"
-frame_progress = 0.0
-script = ExtResource("6_jilna")
+position = Vector2(0, 5)

@@ -1,8 +1,16 @@
 [gd_scene format=3 uid="uid://bkaocv3rb4tmr"]
 
 [ext_resource type="Script" uid="uid://od52r5jb2fr0" path="res://scenes/MomentumController/Modules/Flight/flight.gd" id="1_ptvyh"]
+[ext_resource type="AudioStream" uid="uid://cwekfcpuqictn" path="res://sounds/S3K_BB.wav" id="2_ji44x"]
+[ext_resource type="AudioStream" uid="uid://d4b7h36hca4n1" path="res://sounds/S3K_BA.wav" id="2_mgsq7"]
 
 [node name="Flight" type="Node2D" unique_id=1426147951]
 script = ExtResource("1_ptvyh")
 
 [node name="TiredTimer" type="Timer" parent="." unique_id=333984863]
+
+[node name="TiredSound" type="AudioStreamPlayer2D" parent="." unique_id=1636817642]
+stream = ExtResource("2_ji44x")
+
+[node name="FlySound" type="AudioStreamPlayer2D" parent="." unique_id=1999845584]
+stream = ExtResource("2_mgsq7")
