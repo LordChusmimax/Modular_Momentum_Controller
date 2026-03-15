@@ -5,7 +5,7 @@ extends Node2D
 
 var _on_ground:bool = false
 var _down_is_hold : bool = false
-var spindash_state : bool = false
+const  special_name : String = "Spindash"
 
 #Spindash speed when uncharged
 @export var spindash_min_speed : float = 500.0
@@ -40,14 +40,18 @@ func _down_pressed() -> void:
 	_down_is_hold = true
 	
 func _down_released() -> void:
+	var spindash_state = momentum_controller.special_state == special_name
+	
 	_down_is_hold = false
 	if spindash_state:
 		_spindash_release()
 	
 func _spindash_pressed() -> void:
-	if _on_ground and _down_is_hold and not spindash_state:
-		momentum_controller.force_state(momentum_controller.State.SPECIAL)
-		spindash_state = true
+	var spindash_state = momentum_controller.special_state == special_name
+	var not_on_special = momentum_controller.current_state != momentum_controller.State.SPECIAL
+	
+	if _on_ground and _down_is_hold and not_on_special:
+		momentum_controller.force_state(momentum_controller.State.SPECIAL, special_name)
 		spindash_direction_sign = momentum_controller.last_direction_sign
 		spindash_dust_scene.start_spindash_dust(spindash_direction_sign)
 		_load_spindash()
@@ -60,6 +64,7 @@ func _handle_spindash_state(delta:float)->void:
 	spindash_charge = move_toward(spindash_charge,0,delta/1.5)
 	
 func _spindash_release() -> void:
+	var spindash_state = momentum_controller.special_state == special_name
 	var variable_speed_ratio : float = 1-spindash_min_speed/spindash_max_speed
 	var spindash_speed_range: float = spindash_max_speed-spindash_min_speed
 	var charge_ratio : float = variable_speed_ratio * spindash_charge 

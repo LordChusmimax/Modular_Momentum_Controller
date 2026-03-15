@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://c0kt47subuh81"]
+
+[ext_resource type="PackedScene" uid="uid://cx7iimudr2qwh" path="res://scenes/MomentumController/character.tscn" id="1_qxuaf"]
+[ext_resource type="PackedScene" uid="uid://vreoxbnqv3h7" path="res://scenes/MomentumController/Modules/momentum_audio.tscn" id="2_hixqw"]
+[ext_resource type="PackedScene" uid="uid://b6hx2wl8dque4" path="res://scenes/MomentumController/Modules/spindash/spindash.tscn" id="3_v2wkm"]
+[ext_resource type="PackedScene" uid="uid://dj5f5b0wgvos1" path="res://scenes/MomentumController/Modules/dropdash/dropdash.tscn" id="4_vu1uj"]
+[ext_resource type="PackedScene" uid="uid://did75mn8fg3yc" path="res://scenes/MomentumController/Modules/sonic_animation.tscn" id="5_sq1u8"]
+
+[node name="Sonic" unique_id=1376012498 instance=ExtResource("1_qxuaf")]
+
+[node name="MomentumAudio" parent="." index="5" unique_id=1925184106 instance=ExtResource("2_hixqw")]
+
+[node name="Spindash" parent="." index="6" unique_id=765887188 instance=ExtResource("3_v2wkm")]
+
+[node name="Dropdash" parent="." index="7" unique_id=1405822192 instance=ExtResource("4_vu1uj")]
+
+[node name="SonicAnimation" parent="." index="8" unique_id=2038550287 instance=ExtResource("5_sq1u8")]

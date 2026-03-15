@@ -40,6 +40,7 @@ animations = [{
 }]
 
 [node name="SkidDustAnimatedSprite2D" type="AnimatedSprite2D" unique_id=1125306899]
+z_index = 2
 sprite_frames = SubResource("SpriteFrames_tc861")
 animation = &"Skid"
 autoplay = "Skid"
