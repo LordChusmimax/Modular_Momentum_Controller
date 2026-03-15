@@ -330,19 +330,19 @@ shape = SubResource("RectangleShape2D_lrhn5")
 [node name="RayCasts" type="Node2D" parent="." unique_id=1053525425]
 
 [node name="RayCast2D (sensor_floor_left)" type="RayCast2D" parent="RayCasts" unique_id=1920917443]
-position = Vector2(-9, 0)
+position = Vector2(-6, 0)
 target_position = Vector2(0, 32)
 
 [node name="RayCast2D (sensor_floor_right)" type="RayCast2D" parent="RayCasts" unique_id=1703618010]
-position = Vector2(9, 0)
+position = Vector2(6, 0)
 target_position = Vector2(0, 32)
 
 [node name="RayCast2D (sensor_ceil_left)" type="RayCast2D" parent="RayCasts" unique_id=560731662]
-position = Vector2(-9, 0)
+position = Vector2(-6, 0)
 target_position = Vector2(0, -20)
 
 [node name="RayCast2D (sensor_ceil_right)" type="RayCast2D" parent="RayCasts" unique_id=1505937217]
-position = Vector2(9, 0)
+position = Vector2(6, 0)
 target_position = Vector2(0, -20)
 
 [node name="RayCast2D (sensor_wall_left)" type="RayCast2D" parent="RayCasts" unique_id=2076848866]
